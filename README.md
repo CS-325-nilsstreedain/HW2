@@ -65,7 +65,7 @@ Total Price 568
 
 **Submit the write up to Canvas.**
 
-**Submit to TEACH a .zip file containing your code files for problems 1 & 2. The .zip file should contain**
+**Submit to [TEACH](https://teach.engr.oregonstate.edu/teach.php?type=assignment) a .zip file containing your code files for problems 1 & 2. The .zip file should contain**
 - knapsack.**
 - shopping.**
 - shopping.txt
