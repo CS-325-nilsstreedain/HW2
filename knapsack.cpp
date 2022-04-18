@@ -59,7 +59,7 @@ int main(int argc, const char * argv[]) {
 	//Initalize general vars
 	int W = 100;
 	
-	for (int n = 10; n <= 50; n += 5) {
+	for (int n = 0; n <= 50; n += 1) {
 		// Init val & weight arrays of size n
 		int val[n];
 		int wt[n];
