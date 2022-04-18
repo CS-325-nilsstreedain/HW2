@@ -26,27 +26,26 @@ int recursive(int W, int n, int val[], int wt[]) {
 
 // Dynamic Programming Knapsack algorithm function
 int dynamic(int W, int n, int *val, int *wt) {
-	int K[n + 1][W + 1];
-	
-	int i, j;
-	for (i = 0; i <= n; i++) {
-		for (j = 0; j <= W; j++) {
+	int V[n + 1][W + 1];
+
+	for (int i = 0; i <= n; i++) {
+		for (int w = 0; w <= W; w++) {
 			// Dynamic base case
-			if (i == 0 || j == 0)
-				K[i][j] = 0;
+			if (i == 0 || w == 0)
+				V[i][w] = 0;
 			// Item k is too big to fit with cap W
-			else if (wt[i - 1] > j)
-				K[i][j] = K[i - 1][j];
+			else if (wt[i - 1] > w)
+				V[i][w] = V[i - 1][w];
 			// Else, return larger subset containing or not containing item k
 			else {
-				int nCont = val[i - 1] + K[i - 1][j - wt[i - 1]];
-				int nNot = K[i - 1][j];
-				K[i][j] = (nCont > nNot) ? nCont : nNot;
+				int nCont = val[i - 1] + V[i - 1][w - wt[i - 1]];
+				int nNot = V[i - 1][w];
+				V[i][w] = (nCont > nNot) ? nCont : nNot;
 			}
 		}
 	}
 	
-	return K[n][W];
+	return V[n][W];
 }
 
 // Function to time various Knapsack algorithms
