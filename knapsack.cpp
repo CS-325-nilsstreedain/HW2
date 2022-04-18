@@ -7,6 +7,7 @@
 
 #include <iostream>
 
+// Recursive Knapsack algorithm function
 int recursive(int W, int n, int val[], int wt[]) {
 	// Recursive base case
 	if (W == 0 || n ==0)
@@ -23,16 +24,20 @@ int recursive(int W, int n, int val[], int wt[]) {
 	}
 }
 
+// Dynamic Programming Knapsack algorithm function
 int dynamic(int W, int n, int *val, int *wt) {
 	int K[n + 1][W + 1];
 	
 	int i, j;
 	for (i = 0; i <= n; i++) {
 		for (j = 0; j <= W; j++) {
+			// Dynamic base case
 			if (i == 0 || j == 0)
 				K[i][j] = 0;
+			// Item k is too big to fit with cap W
 			else if (wt[i - 1] > j)
 				K[i][j] = K[i - 1][j];
+			// Else, return larger subset containing or not containing item k
 			else {
 				int nCont = val[i - 1] + K[i - 1][j - wt[i - 1]];
 				int nNot = K[i - 1][j];
@@ -44,6 +49,7 @@ int dynamic(int W, int n, int *val, int *wt) {
 	return K[n][W];
 }
 
+// Function to time various Knapsack algorithms
 template<typename Function>
 double timer(Function func, int *max, int W, int n, int *val, int *wt) {
 	clock_t start, end;
@@ -53,6 +59,7 @@ double timer(Function func, int *max, int W, int n, int *val, int *wt) {
 	return (double)(end - start)/CLOCKS_PER_SEC;
 }
 
+// Main driver knapsack fucntion
 int main(int argc, const char * argv[]) {
 	srand((int)time(0));
 	
@@ -70,6 +77,7 @@ int main(int argc, const char * argv[]) {
 			wt[i] = rand() % 50;
 		}
 		
+		// Time each knapsack algorithm and store results
 		int rMax, dpMax;
 		double rTime = timer(recursive, &rMax, W, n, val, wt);
 		double dpTime = timer(dynamic, &dpMax, W, n, val, wt);
